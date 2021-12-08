@@ -122,42 +122,42 @@ chevron_t2 <- tq_get("CVX",
                 to = "2020-06-25",
                 get = "stock.prices")
 
-indu_all <- tq_get("XOI",                    
+indu_all <- tq_get("^XOI",                    
                   from = '2019-08-22',
                   to = "2020-06-25",
                   get = "stock.prices")
 
-indu_t0 <- tq_get("XOI",                    
+indu_t0 <- tq_get("^XOI",                    
                 from = '2019-08-22',
                 to = "2020-04-25",
                 get = "stock.prices")
 
-indu_t1 <- tq_get("XOI",                    
+indu_t1 <- tq_get("^XOI",                    
                 from = '2020-04-26',
                 to = "2020-05-25",
                 get = "stock.prices")
-
-indu_t2 <- tq_get("XOI",                    
+str(indu_t2)
+indu_t2 <- tq_get("^XOI",                    
                 from = '2020-05-27',
                 to = "2020-06-25",
                 get = "stock.prices")
 
-mrkt_all <- tq_get("NYA",                    
+mrkt_all <- tq_get("^NYA",                    
                from = '2019-08-22',
                to = "2020-06-25",
                get = "stock.prices")
 
-mrkt_t0 <- tq_get("NYA",                    
+mrkt_t0 <- tq_get("^NYA",                    
                 from = '2019-08-22',
                 to = "2020-04-25",
                 get = "stock.prices")
 
-mrkt_t1 <- tq_get("NYA",                    
+mrkt_t1 <- tq_get("^NYA",                    
                 from = '2020-04-26',
                 to = "2020-05-25",
                 get = "stock.prices")
 
-mrkt_t2 <- tq_get("NYA",                    
+mrkt_t2 <- tq_get("^NYA",                    
                 from = '2020-05-27',
                 to = "2020-06-25",
                 get = "stock.prices")
@@ -225,3 +225,9 @@ market_daily_returns <- mrkt_all %>%
                mutate_fun = periodReturn,   # This specifies what to do with that column
                period = "daily",      # This argument calculates Daily returns
                col_rename = "market_returns") # renames the column
+
+# 1. do all returns
+# 2. log return
+# 3. regression for expected and abnormal returns (take the predicted values as ER - google it)
+# 4. cumulative abnormal returns
+# 5. get test statistics 
