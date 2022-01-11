@@ -524,6 +524,233 @@ market_t2_LR <- c(diff(log(market_t2$adjusted), lag = 1))
  
 # 3. Regression for expected and abnormal returns (take the predicted values as ER - google it) ----
 
+## RDSA - BP ER ----
 
-# 4. CAR (cumulative abnormal returns) ----
-# 5. Test statistics ---- 
+lm_rdsa_bp_all <- lm(formula = rdsa_all$adjusted ~ bp_all$adjusted)
+
+lm_rdsa_bp_t0 <- lm(formula = rdsa_t0$adjusted ~ bp_t0$adjusted)
+
+lm_rdsa_bp_t1 <- lm(formula = rdsa_t1$adjusted ~ bp_t1$adjusted)
+
+lm_rdsa_bp_t2 <- lm(formula = rdsa_t2$adjusted ~ bp_t2$adjusted)
+
+### Predictions
+
+prdt_bp_all <- predict(lm_rdsa_bp_all)
+
+prdt_bp_t0 <- predict(lm_rdsa_bp_t0)
+
+prdt_bp_t1 <- predict(lm_rdsa_bp_t1)
+
+prdt_bp_t2 <- predict(lm_rdsa_bp_t2)
+
+### Residuals
+
+rsd_bp <- resid(lm_rdsa_bp_all)
+
+rsd_bp_t0 <- resid(lm_rdsa_bp_t0)
+
+rsd_bp_t1 <- resid(lm_rdsa_bp_t1)
+
+rsd_bp_t2 <- resid(lm_rdsa_bp_t2)
+
+## RDSA - Total Energies ER ----
+
+lm_rdsa_totalenergies_all <- lm(formula = rdsa_all$adjusted ~ totalenergies_all$adjusted)
+
+lm_rdsa_totalenergies_t0 <- lm(formula = rdsa_t0$adjusted ~ totalenergies_t0$adjusted)
+
+lm_rdsa_totalenergies_t1 <- lm(formula = rdsa_t1$adjusted ~ totalenergies_t1$adjusted)
+
+lm_rdsa_totalenergies_t2 <- lm(formula = rdsa_t2$adjusted ~ totalenergies_t2$adjusted)
+
+### Predictions
+
+prdt_totalenergies_all <- predict(lm_rdsa_totalenergies_all)
+
+prdt_totalenergies_t0 <- predict(lm_rdsa_totalenergies_t0)
+
+prdt_totalenergies_t1 <- predict(lm_rdsa_totalenergies_t1)
+
+prdt_totalenergies_t2 <- predict(lm_rdsa_totalenergies_t2)
+
+### Residuals
+
+rsd_totalenergies_all <- resid(lm_rdsa_totalenergies_all)
+
+rsd_totalenergies_t0 <- resid(lm_rdsa_totalenergies_t0)
+
+rsd_totalenergies_t1 <- resid(lm_rdsa_totalenergies_t1)
+
+rsd_totalenergies_t2 <- resid(lm_rdsa_totalenergies_t2)
+
+## RDSA - ExxonMobil ER ----
+
+lm_rdsa_exxonmobil_all <- lm(formula = rdsa_all$adjusted ~ exxonmobil_all$adjusted)
+
+lm_rdsa_exxonmobil_t0 <- lm(formula = rdsa_t0$adjusted ~ exxonmobil_t0$adjusted)
+
+lm_rdsa_exxonmobil_t1 <- lm(formula = rdsa_t1$adjusted ~ exxonmobil_t1$adjusted)
+
+lm_rdsa_exxonmobil_t2 <- lm(formula = rdsa_t2$adjusted ~ exxonmobil_t2$adjusted)
+
+### Predictions
+
+prdt_exxonmobil_all <- predict(lm_rdsa_exxonmobil_all)
+
+prdt_exxonmobil_t0 <- predict(lm_rdsa_exxonmobil_t0)
+
+prdt_exxonmobil_t1 <- predict(lm_rdsa_exxonmobil_t1)
+
+prdt_exxonmobil_t2 <- predict(lm_rdsa_exxonmobil_t2)
+
+### Residuals
+
+rsd_exxonmobil_all <- resid(lm_rdsa_exxonmobil_all)
+
+rsd_exxonmobil_t0 <- resid(lm_rdsa_exxonmobil_t0)
+
+rsd_exxonmobil_t1 <- resid(lm_rdsa_exxonmobil_t1)
+
+rsd_exxonmobil_t2 <- resid(lm_rdsa_exxonmobil_t2)
+
+## RDSA - Conoco ER ----
+
+lm_rdsa_conoco_all <- lm(formula = rdsa_all$adjusted ~ conoco_all$adjusted)
+
+lm_rdsa_conoco_t0 <- lm(formula = rdsa_t0$adjusted ~ conoco_t0$adjusted)
+
+lm_rdsa_conoco_t1 <- lm(formula = rdsa_t1$adjusted ~ conoco_t1$adjusted)
+
+lm_rdsa_conoco_t2 <- lm(formula = rdsa_t2$adjusted ~ conoco_t2$adjusted)
+
+### Predictions
+
+prdt_conoco_all <- predict(lm_rdsa_conoco_all)
+
+prdt_conoco_t0 <- predict(lm_rdsa_conoco_t0)
+
+prdt_conoco_t1 <- predict(lm_rdsa_conoco_t1)
+
+prdt_conoco_t2 <- predict(lm_rdsa_conoco_t2)
+
+### Residuals
+
+rsd_conoco_all <- resid(lm_rdsa_conoco_all)
+
+rsd_conoco_t0 <- resid(lm_rdsa_conoco_t0)
+
+rsd_conoco_t1 <- resid(lm_rdsa_conoco_t1)
+
+rsd_conoco_t2 <- resid(lm_rdsa_conoco_t2)
+
+## RDSA - Chevron Corporation ER ----
+
+lm_rdsa_chevron_all <- lm(formula = rdsa_all$adjusted ~ chevron_all$adjusted)
+
+lm_rdsa_chevron_t0 <- lm(formula = rdsa_t0$adjusted ~ chevron_t0$adjusted)
+
+lm_rdsa_chevron_t1 <- lm(formula = rdsa_t1$adjusted ~ chevron_t1$adjusted)
+
+lm_rdsa_chevron_t2 <- lm(formula = rdsa_t2$adjusted ~ chevron_t2$adjusted)
+
+### Predictions
+
+prdt_chevron_all <- predict(lm_rdsa_chevron_all)
+
+prdt_chevron_t0 <- predict(lm_rdsa_chevron_t0)
+
+prdt_chevron_t1 <- predict(lm_rdsa_chevron_t1)
+
+prdt_chevron_t2 <- predict(lm_rdsa_chevron_t2)
+
+### Residuals
+
+rsd_chevron_all <- resid(lm_rdsa_chevron_all)
+
+rsd_chevron_t0 <- resid(lm_rdsa_chevron_t0)
+
+rsd_chevron_t1 <- resid(lm_rdsa_chevron_t1)
+
+rsd_chevron_t2 <- resid(lm_rdsa_chevron_t2)
+
+## RDSA - Industry ER ----
+
+lm_rdsa_industry_all <- lm(formula = rdsa_all$adjusted ~ industry_all$adjusted)
+
+lm_rdsa_industry_t0 <- lm(formula = rdsa_t0$adjusted ~ industry_t0$adjusted)
+
+lm_rdsa_industry_t1 <- lm(formula = rdsa_t1$adjusted ~ industry_t1$adjusted)
+
+lm_rdsa_industry_t2 <- lm(formula = rdsa_t2$adjusted ~ industry_t2$adjusted)
+
+### Predictions
+
+prdt_industry_all <- predict(lm_rdsa_industry_all)
+
+prdt_industry_t0 <- predict(lm_rdsa_industry_t0)
+
+prdt_industry_t1 <- predict(lm_rdsa_industry_t1)
+
+prdt_industry_t2 <- predict(lm_rdsa_industry_t2)
+
+### Residuals
+
+rsd_industry_all <- resid(lm_rdsa_industry_all)
+
+rsd_industry_t0 <- resid(lm_rdsa_industry_t0)
+
+rsd_industry_t1 <- resid(lm_rdsa_industry_t1)
+
+rsd_industry_t2 <- resid(lm_rdsa_industry_t2)
+
+## RDSA - Market ER ----
+
+lm_rdsa_market_all <- lm(formula = rdsa_all$adjusted ~ market_all$adjusted)
+
+lm_rdsa_market_t0 <- lm(formula = rdsa_t0$adjusted ~ market_t0$adjusted)
+
+lm_rdsa_market_t1 <- lm(formula = rdsa_t1$adjusted ~ market_t1$adjusted)
+
+lm_rdsa_market_t2 <- lm(formula = rdsa_t2$adjusted ~ market_t2$adjusted)
+
+### Predictions
+
+prdt_market_all <- predict(lm_rdsa_market_all)
+
+prdt_market_t0 <- predict(lm_rdsa_market_t0)
+
+prdt_market_t1 <- predict(lm_rdsa_market_t1)
+
+prdt_market_t2 <- predict(lm_rdsa_market_t2)
+
+### Residuals
+
+rsd_market_all <- resid(lm_rdsa_market_all)
+
+rsd_market_t0 <- resid(lm_rdsa_market_t0)
+
+rsd_market_t1 <- resid(lm_rdsa_market_t1)
+
+rsd_market_t2 <- resid(lm_rdsa_market_t2)
+
+# 5. CAR (cumulative abnormal returns) ----
+
+
+CAR_bp <- sum(resid(lm_rdsa_bp))
+
+CAR_totalenergies <- sum(resid(lm_rdsa_totalenergies))
+
+CAR_exxonmobil <- sum(resid(lm_rdsa_exxonmobil))
+
+CAR_conoco <- sum(resid(lm_rdsa_conoco))
+
+CAR_chevron <- sum(resid(lm_rdsa_chevron))
+
+CAR_bp <- sum(resid(lm_rdsa_industry))
+
+CAR_market <- sum(resid(lm_rdsa_market))
+
+# 6. Test statistics ---- 
+
+
