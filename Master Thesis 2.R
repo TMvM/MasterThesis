@@ -546,7 +546,7 @@ prdt_bp_t2 <- predict(lm_rdsa_bp_t2)
 
 ### Residuals
 
-rsd_bp <- resid(lm_rdsa_bp_all)
+rsd_bp_all <- resid(lm_rdsa_bp_all)
 
 rsd_bp_t0 <- resid(lm_rdsa_bp_t0)
 
@@ -736,21 +736,310 @@ rsd_market_t2 <- resid(lm_rdsa_market_t2)
 
 # 5. CAR (cumulative abnormal returns) ----
 
+## CAR BP ----
 
-CAR_bp <- sum(resid(lm_rdsa_bp))
+CAR_bp_all <- sum(rsd_bp_all)
 
-CAR_totalenergies <- sum(resid(lm_rdsa_totalenergies))
+CAR_bp_t0 <- sum(rsd_bp_t0)
 
-CAR_exxonmobil <- sum(resid(lm_rdsa_exxonmobil))
+CAR_bp_t1 <- sum(rsd_bp_t1)
 
-CAR_conoco <- sum(resid(lm_rdsa_conoco))
+CAR_bp_t2 <- sum(rsd_bp_t2)
 
-CAR_chevron <- sum(resid(lm_rdsa_chevron))
+## CAR Totalenergies ----
 
-CAR_bp <- sum(resid(lm_rdsa_industry))
+CAR_totalenergies_all <- sum(rsd_totalenergies_all)
 
-CAR_market <- sum(resid(lm_rdsa_market))
+CAR_totalenergies_t0 <- sum(rsd_totalenergies_t0)
 
-# 6. Test statistics ---- 
+CAR_totalenergies_t1 <- sum(rrsd_totalenergies_t1)
+
+CAR_totalenergies_t2 <- sum(rsd_totalenergies_t2)
+
+## CAR Exxonmobil ----
+
+CAR_exxonmobil_all <- sum(rsd_exxonmobil_all)
+
+CAR_exxonmobil_t0 <- sum(rsd_exxonmobil_t0)
+
+CAR_exxonmobil_t1 <- sum(rsd_exxonmobil_t1)
+
+CAR_exxonmobil_t2 <- sum(rsd_exxonmobil_t2)
+
+## CAR Conoco ----
+
+CAR_conoco_all <- sum(rsd_conoco_all)
+
+CAR_conoco_t0 <- sum(rsd_conoco_t0)
+
+CAR_conoco_t1 <- sum(rsd_conoco_t1)
+
+CAR_conoco_t2 <- sum(rsd_conoco_t2)
+
+## CAR Chevron ----
+
+CAR_chevron_all <- sum(rsd_chevron_all)
+
+CAR_chevron_t0 <- sum(rsd_chevron_t0)
+
+CAR_chevron_t1 <- sum(rsd_chevron_t1)
+
+CAR_chevron_t2 <- sum(rsd_chevron_t2)
+
+## CAR Industry ----
+
+CAR_industry_all <- sum(rsd_industry_all)
+
+CAR_industry_t0 <- sum(rsd_industry_t0)
+
+CAR_industry_t1 <- sum(rsd_industry_t1)
+
+CAR_industry_t2 <- sum(rsd_industry_t2)
+
+## CAR Market ----
+
+CAR_market_all <- sum(rsd_market_all)
+
+CAR_market_t0 <- sum(rsd_market_t0)
+
+CAR_market_t1 <- sum(rsd_market_t1)
+
+CAR_market_t2 <- sum(rsd_market_t2)
+
+# 6. TEST STATISTICS ---- 
+
+## VARIANCE ----
+
+### BP  ----
+
+var_bp_all <- var(rsd_bp_all)
+ 
+var_bp_t0 <- var(rsd_bp_t0)
+
+var_bp_t1 <- var(rsd_bp_t1)
+
+var_bp_t2 <- var(rsd_bp_t2)
+
+### Total Energies ----
+
+var_totalenergies_all <- var(rsd_totalenergies_all)
+
+var_totalenergies_t0 <- var(rsd_totalenergies_t0)
+
+var_totalenergies_t1 <- var(rsd_totalenergies_t1)
+
+var_totalenergies_t2 <- var(rsd_totalenergies_t2)
+
+### ExxonMobil ----
+
+var_exxonmobil_all <- var(rsd_exxonmobil_all)
+
+var_exxonmobil_t0 <- var(rsd_exxonmobil_t0)
+
+var_exxonmobil_t1 <- var(rsd_exxonmobil_t1)
+
+var_exxonmobil_t2 <- var(rsd_exxonmobil_t2)
+
+### Conoco ----
+
+var_conoco_all <- var(rsd_conoco_all)
+
+var_conoco_t0 <- var(rsd_conoco_t0)
+
+var_conoco_t1 <- var(rsd_conoco_t1)
+
+var_conoco_t2 <- var(rsd_conoco_t2)
+
+### Chevron  ----
+
+var_chevron_all <- var(rsd_chevron_all)
+
+var_chevron_t0 <- var(rsd_chevron_t0)
+
+var_chevron_t1 <- var(rsd_chevron_t1)
+
+var_chevron_t2 <- var(rsd_chevron_t2)
+
+### Industry ----
+
+var_industry_all <- var(rsd_industry_all)
+
+var_industry_t0 <- var(rsd_industry_t0)
+
+var_industry_t1 <- var(rsd_industry_t1)
+
+var_industry_t2 <- var(rsd_industry_t2)
+
+### Market ----
+
+var_market_all <- var(rsd_market_all)
+
+var_market_t0 <- var(rsd_market_t0)
+
+var_market_t1 <- var(rsd_market_t1)
+
+var_market_t2 <- var(rsd_market_t2)
+
+## SQUARE ROOT (LENGTH*VAR) ----
+
+
+### BP ----
+sqrt_bp_all <- sqrt((length(rsd_bp_all)*var_bp_all))
+
+sqrt1_bp_t0 <- sqrt((length(rsd_bp_t0)*var_bp_t0))
+
+sqrt1_bp_t1 <- sqrt((length(rsd_bp_t1)*var_bp_t1))
+
+sqrt1_bp_t2 <- sqrt((length(rsd_bp_t2)*var_bp_t2))
+
+
+### Totalenergies ----
+
+sqrt_totalenergies_all <- sqrt((length(var_totalenergies_all)*var_totalenergies_all))
+
+sqrt_totalenergies_t0 <- sqrt((length(var_totalenergies_t0)*var_totalenergies_t0))
+
+sqrt_totalenergies_t1 <- sqrt((length(var_totalenergies_t1)*var_totalenergies_t1))
+
+sqrt_totalenergies_t2 <- sqrt((length(var_totalenergies_t2)*var_totalenergies_t2))
+
+
+### Exxonmobil ----
+
+sqrt_exxonmobil_all <- sqrt((length(var_exxonmobil_all)*var_exxonmobil_all))
+
+sqrt_exxonmobil_t0 <- sqrt((length(var_exxonmobil_t0)*var_exxonmobil_t0))
+
+sqrt_exxonmobil_t1 <- sqrt((length(var_exxonmobil_t1)*var_exxonmobil_t1))
+
+sqrt_exxonmobil_t2 <- sqrt((length(var_exxonmobil_t2)*var_exxonmobil_t2))
+
+### Conoco ----
+
+sqrt_conoco_all <- sqrt((length(var_conoco_all)*var_conoco_all))
+
+sqrt_conoco_t0 <- sqrt((length(var_conoco_t0)*var_conoco_t0))
+
+sqrt_conoco_t1 <- sqrt((length(var_conoco_t1)*var_conoco_t1))
+
+sqrt_conoco_t2 <- sqrt((length(var_conoco_t2)*var_conoco_t2))
+
+### Chevron ----
+
+sqrt_chevron_all <- sqrt((length(var_chevron_all)*var_chevron_all))
+
+sqrt_chevron_t0 <- sqrt((length(var_chevron_t0)*var_chevron_t0))
+
+sqrt_chevron_t1 <- sqrt((length(var_chevron_t1)*var_chevron_t1))
+
+sqrt_chevron_t2 <- sqrt((length(var_chevron_t2)*var_chevron_t2))
+
+
+### Industry ----
+
+
+sqrt_industry_all <- sqrt((length(var_industry_all)*var_industry_all))
+
+sqrt_industry_t0 <- sqrt((length(var_industry_t0)*var_industry_t0))
+
+sqrt_industry_t1 <- sqrt((length(var_industry_t1)*var_industry_t1))
+
+sqrt_industry_t2 <- sqrt((length(var_industry_t2)*var_industry_t2))
+
+
+### Market ----
+
+sqrt_market_all <- sqrt((length(var_market_all)*var_market_all))
+
+sqrt_market_t0 <- sqrt((length(var_market_t0)*var_market_t0))
+
+sqrt_market_t1 <- sqrt((length(var_market_t1)*var_market_t1))
+
+sqrt_market_t2 <- sqrt((length(var_market_t2)*var_market_t2))
+
+## T & P VALUES ----
+
+### BP ----
+
+t_bp_all <- CAR_bp_all/sqrt_bp_all
+
+OR
+
+xbar_bp_all <- mean(rsd_bp_all)
+mu0 <- 0
+s_bp_all <- sd(rsd_bp_all)
+n_bp_all <- length(rsd_bp_all)
+test1_bp_all <- (xbar_bp_all - mu0)/(s_bp_all/sqrt(n_bp_all))
+
+
+test_bp_t0 <- CAR_bp_t0/sqrt1_bp_t0
+
+
+test_bp_t1 <- CAR_bp_t1/sqrt1_bp_t1
+
+test_bp_t2 <- CAR_bp_t2/sqrt1_bp_t2
+
+### Totalenergies ----
+
+CAR_totalenergies_all
+
+CAR_totalenergies_t0
+
+CAR_totalenergies_t1
+
+CAR_totalenergies_t2
+
+### Exxonmobil ----
+
+CAR_exxonmobil_all
+
+CAR_exxonmobil_t0
+
+CAR_exxonmobil_t1
+
+CAR_exxonmobil_t2
+
+### Conoco ----
+
+CAR_conoco_all
+
+CAR_conoco_t0
+
+CAR_conoco_t1
+
+CAR_conoco_t2
+
+### Chevron ----
+
+CAR_chevron_all
+
+CAR_chevron_t0
+
+CAR_chevron_t1
+
+CAR_chevron_t2
+
+### Industry ----
+
+CAR_industry_all
+
+CAR_industry_t0
+
+CAR_industry_t1
+
+CAR_industry_t2
+
+### Market ----
+
+CAR_market_all
+
+CAR_market_t0
+
+CAR_market_t1
+
+CAR_market_t2
+
+
+
 
 
