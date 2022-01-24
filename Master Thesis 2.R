@@ -3,6 +3,10 @@
 library(tidyverse)
 library(here)
 library(tidyquant)
+library(dplyr)
+
+
+
 
 # Data collection per T ----
 
@@ -445,11 +449,27 @@ market_t2_DR <- market_t2_DR[-c(1),]
 ## RDSA LR ----
 rdsa_all_LR <- c(diff(log(rdsa_all$adjusted), lag = 1))
 
+rdsa_all_LR <- data.frame(rdsa_all_DR$date, rdsa_all_LR)
+names (rdsa_all_LR) <- c('Date', 'Log Returns')
+
+
 rdsa_t0_LR <- c(diff(log(rdsa_t0$adjusted), lag = 1))
+
+rdsa_t0_LR <- data.frame(rdsa_t0_DR$date, rdsa_t0_LR)
+names (rdsa_t0_LR) <- c('Date', 'Log Returns')
+
 
 rdsa_t1_LR <- c(diff(log(rdsa_t1$adjusted), lag = 1))
 
+rdsa_t1_LR <- data.frame(rdsa_t1_DR$date, rdsa_t1_LR)
+names (rdsa_t1_LR) <- c('Date', 'Log Returns')
+
+
 rdsa_t2_LR <- c(diff(log(rdsa_t2$adjusted), lag = 1))
+
+rdsa_t2_LR <- data.frame(rdsa_t2_DR$date, rdsa_t2_LR)
+names (rdsa_t2_LR) <- c('Date', 'Log Returns')
+
 
 ## BP LR ----
 
@@ -525,14 +545,13 @@ market_t2_LR <- c(diff(log(market_t2$adjusted), lag = 1))
 # 3. Regression for expected and abnormal returns (take the predicted values as ER - google it) ----
 
 ## RDSA - BP ER ----
+lm_rdsa_bp_all <- lm(formula = rdsa_all_LR ~ bp_all_LR)
 
-lm_rdsa_bp_all <- lm(formula = rdsa_all$adjusted ~ bp_all$adjusted)
+lm_rdsa_bp_t0 <- lm(formula = rdsa_t0_LR ~ bp_t0_LR)
 
-lm_rdsa_bp_t0 <- lm(formula = rdsa_t0$adjusted ~ bp_t0$adjusted)
+lm_rdsa_bp_t1 <- lm(formula = rdsa_t1_LR ~ bp_t1_LR)
 
-lm_rdsa_bp_t1 <- lm(formula = rdsa_t1$adjusted ~ bp_t1$adjusted)
-
-lm_rdsa_bp_t2 <- lm(formula = rdsa_t2$adjusted ~ bp_t2$adjusted)
+lm_rdsa_bp_t2 <- lm(formula = rdsa_t2_LR ~ bp_t2_LR)
 
 ### Predictions
 
@@ -556,13 +575,13 @@ rsd_bp_t2 <- resid(lm_rdsa_bp_t2)
 
 ## RDSA - Total Energies ER ----
 
-lm_rdsa_totalenergies_all <- lm(formula = rdsa_all$adjusted ~ totalenergies_all$adjusted)
+lm_rdsa_totalenergies_all <- lm(formula = rdsa_all_LR ~ totalenergies_all_LR)
 
-lm_rdsa_totalenergies_t0 <- lm(formula = rdsa_t0$adjusted ~ totalenergies_t0$adjusted)
+lm_rdsa_totalenergies_t0 <- lm(formula = rdsa_t0_LR ~ totalenergies_t0_LR)
 
-lm_rdsa_totalenergies_t1 <- lm(formula = rdsa_t1$adjusted ~ totalenergies_t1$adjusted)
+lm_rdsa_totalenergies_t1 <- lm(formula = rdsa_t1_LR ~ totalenergies_t1_LR)
 
-lm_rdsa_totalenergies_t2 <- lm(formula = rdsa_t2$adjusted ~ totalenergies_t2$adjusted)
+lm_rdsa_totalenergies_t2 <- lm(formula = rdsa_t2_LR ~ totalenergies_t2_LR)
 
 ### Predictions
 
@@ -586,13 +605,13 @@ rsd_totalenergies_t2 <- resid(lm_rdsa_totalenergies_t2)
 
 ## RDSA - ExxonMobil ER ----
 
-lm_rdsa_exxonmobil_all <- lm(formula = rdsa_all$adjusted ~ exxonmobil_all$adjusted)
+lm_rdsa_exxonmobil_all <- lm(formula = rdsa_all_LR ~ exxonmobil_all_LR)
 
-lm_rdsa_exxonmobil_t0 <- lm(formula = rdsa_t0$adjusted ~ exxonmobil_t0$adjusted)
+lm_rdsa_exxonmobil_t0 <- lm(formula = rdsa_t0_LR ~ exxonmobil_t0_LR)
 
-lm_rdsa_exxonmobil_t1 <- lm(formula = rdsa_t1$adjusted ~ exxonmobil_t1$adjusted)
+lm_rdsa_exxonmobil_t1 <- lm(formula = rdsa_t1_LR ~ exxonmobil_t1_LR)
 
-lm_rdsa_exxonmobil_t2 <- lm(formula = rdsa_t2$adjusted ~ exxonmobil_t2$adjusted)
+lm_rdsa_exxonmobil_t2 <- lm(formula = rdsa_t2_LR ~ exxonmobil_t2_LR)
 
 ### Predictions
 
@@ -616,13 +635,13 @@ rsd_exxonmobil_t2 <- resid(lm_rdsa_exxonmobil_t2)
 
 ## RDSA - Conoco ER ----
 
-lm_rdsa_conoco_all <- lm(formula = rdsa_all$adjusted ~ conoco_all$adjusted)
+lm_rdsa_conoco_all <- lm(formula = rdsa_all_LR ~ conoco_all_LR)
 
-lm_rdsa_conoco_t0 <- lm(formula = rdsa_t0$adjusted ~ conoco_t0$adjusted)
+lm_rdsa_conoco_t0 <- lm(formula = rdsa_t0_LR ~ conoco_t0_LR)
 
-lm_rdsa_conoco_t1 <- lm(formula = rdsa_t1$adjusted ~ conoco_t1$adjusted)
+lm_rdsa_conoco_t1 <- lm(formula = rdsa_t1_LR ~ conoco_t1_LR)
 
-lm_rdsa_conoco_t2 <- lm(formula = rdsa_t2$adjusted ~ conoco_t2$adjusted)
+lm_rdsa_conoco_t2 <- lm(formula = rdsa_t2_LR ~ conoco_t2_LR)
 
 ### Predictions
 
@@ -646,13 +665,13 @@ rsd_conoco_t2 <- resid(lm_rdsa_conoco_t2)
 
 ## RDSA - Chevron Corporation ER ----
 
-lm_rdsa_chevron_all <- lm(formula = rdsa_all$adjusted ~ chevron_all$adjusted)
+lm_rdsa_chevron_all <- lm(formula = rdsa_all_LR ~ chevron_all_LR)
 
-lm_rdsa_chevron_t0 <- lm(formula = rdsa_t0$adjusted ~ chevron_t0$adjusted)
+lm_rdsa_chevron_t0 <- lm(formula = rdsa_t0_LR ~ chevron_t0_LR)
 
-lm_rdsa_chevron_t1 <- lm(formula = rdsa_t1$adjusted ~ chevron_t1$adjusted)
+lm_rdsa_chevron_t1 <- lm(formula = rdsa_t1_LR ~ chevron_t1_LR)
 
-lm_rdsa_chevron_t2 <- lm(formula = rdsa_t2$adjusted ~ chevron_t2$adjusted)
+lm_rdsa_chevron_t2 <- lm(formula = rdsa_t2_LR ~ chevron_t2_LR)
 
 ### Predictions
 
@@ -676,13 +695,13 @@ rsd_chevron_t2 <- resid(lm_rdsa_chevron_t2)
 
 ## RDSA - Industry ER ----
 
-lm_rdsa_industry_all <- lm(formula = rdsa_all$adjusted ~ industry_all$adjusted)
+lm_rdsa_industry_all <- lm(formula = rdsa_all_LR ~ industry_all_LR)
 
-lm_rdsa_industry_t0 <- lm(formula = rdsa_t0$adjusted ~ industry_t0$adjusted)
+lm_rdsa_industry_t0 <- lm(formula = rdsa_t0_LR ~ industry_t0_LR)
 
-lm_rdsa_industry_t1 <- lm(formula = rdsa_t1$adjusted ~ industry_t1$adjusted)
+lm_rdsa_industry_t1 <- lm(formula = rdsa_t1_LR ~ industry_t1_LR)
 
-lm_rdsa_industry_t2 <- lm(formula = rdsa_t2$adjusted ~ industry_t2$adjusted)
+lm_rdsa_industry_t2 <- lm(formula = rdsa_t2_LR ~ industry_t2_LR)
 
 ### Predictions
 
@@ -706,13 +725,13 @@ rsd_industry_t2 <- resid(lm_rdsa_industry_t2)
 
 ## RDSA - Market ER ----
 
-lm_rdsa_market_all <- lm(formula = rdsa_all$adjusted ~ market_all$adjusted)
+lm_rdsa_market_all <- lm(formula = rdsa_all_LR ~ market_all_LR)
 
-lm_rdsa_market_t0 <- lm(formula = rdsa_t0$adjusted ~ market_t0$adjusted)
+lm_rdsa_market_t0 <- lm(formula = rdsa_t0_LR ~ market_t0_LR)
 
-lm_rdsa_market_t1 <- lm(formula = rdsa_t1$adjusted ~ market_t1$adjusted)
+lm_rdsa_market_t1 <- lm(formula = rdsa_t1_LR ~ market_t1_LR)
 
-lm_rdsa_market_t2 <- lm(formula = rdsa_t2$adjusted ~ market_t2$adjusted)
+lm_rdsa_market_t2 <- lm(formula = rdsa_t2_LR ~ market_t2_LR)
 
 ### Predictions
 
@@ -752,7 +771,7 @@ CAR_totalenergies_all <- sum(rsd_totalenergies_all)
 
 CAR_totalenergies_t0 <- sum(rsd_totalenergies_t0)
 
-CAR_totalenergies_t1 <- sum(rrsd_totalenergies_t1)
+CAR_totalenergies_t1 <- sum(rsd_totalenergies_t1)
 
 CAR_totalenergies_t2 <- sum(rsd_totalenergies_t2)
 
@@ -886,11 +905,11 @@ var_market_t2 <- var(rsd_market_t2)
 ### BP ----
 sqrt_bp_all <- sqrt((length(rsd_bp_all)*var_bp_all))
 
-sqrt1_bp_t0 <- sqrt((length(rsd_bp_t0)*var_bp_t0))
+sqrt_bp_t0 <- sqrt((length(rsd_bp_t0)*var_bp_t0))
 
-sqrt1_bp_t1 <- sqrt((length(rsd_bp_t1)*var_bp_t1))
+sqrt_bp_t1 <- sqrt((length(rsd_bp_t1)*var_bp_t1))
 
-sqrt1_bp_t2 <- sqrt((length(rsd_bp_t2)*var_bp_t2))
+sqrt_bp_t2 <- sqrt((length(rsd_bp_t2)*var_bp_t2))
 
 
 ### Totalenergies ----
@@ -960,86 +979,151 @@ sqrt_market_t2 <- sqrt((length(var_market_t2)*var_market_t2))
 ## T & P VALUES ----
 
 ### BP ----
+#### T ----
 
-t_bp_all <- CAR_bp_all/sqrt_bp_all
+test_bp_all <- CAR_bp_all/sqrt_bp_all
 
-OR
+test_bp_t0 <- CAR_bp_t0/sqrt_bp_t0
 
-xbar_bp_all <- mean(rsd_bp_all)
-mu0 <- 0
-s_bp_all <- sd(rsd_bp_all)
-n_bp_all <- length(rsd_bp_all)
-test1_bp_all <- (xbar_bp_all - mu0)/(s_bp_all/sqrt(n_bp_all))
+test_bp_t1 <- CAR_bp_t1/sqrt_bp_t1
 
+test_bp_t2 <- CAR_bp_t2/sqrt_bp_t2
 
-test_bp_t0 <- CAR_bp_t0/sqrt1_bp_t0
+#### P ----
 
+pv_bp_all <- 2*pt(q = test_bp_all, df = 212, lower.tail = FALSE)
 
-test_bp_t1 <- CAR_bp_t1/sqrt1_bp_t1
+pv_bp_t0 <- 2*pt(q = test_bp_t0, df = 170, lower.tail = FALSE)
 
-test_bp_t2 <- CAR_bp_t2/sqrt1_bp_t2
+pv_bp_t1 <- 2*pt(q = test_bp_t1, df = 19, lower.tail = FALSE)
+
+pv_bp_t2 <- 2*pt(q = test_bp_t2, df = 21, lower.tail = FALSE)
+
 
 ### Totalenergies ----
+#### T ----
 
-CAR_totalenergies_all
+test_totalenergies_all <- CAR_totalenergies_all/sqrt_totalenergies_all
 
-CAR_totalenergies_t0
+test_totalenergies_t0 <- CAR_totalenergies_t0/sqrt_totalenergies_t0
 
-CAR_totalenergies_t1
+test_totalenergies_t1 <- CAR_totalenergies_t1/sqrt_totalenergies_t1
 
-CAR_totalenergies_t2
+test_totalenergies_t2 <- CAR_totalenergies_t2/sqrt_totalenergies_t2
+
+#### P ----
+
+pv_totalenergies_all <- 2*pt(q = test_totalenergies_all, df = 212, lower.tail = FALSE)
+
+pv_totalenergies_t0 <- 2*pt(q = test_totalenergies_t0, df = 170, lower.tail = FALSE)
+
+pv_totalenergies_t1 <- 2*pt(q = test_totalenergies_t1, df = 19, lower.tail = FALSE)
+
+pv_totalenergies_t2 <- 2*pt(q = test_totalenergies_t2, df = 21, lower.tail = FALSE)
 
 ### Exxonmobil ----
+#### T ----
 
-CAR_exxonmobil_all
+test_exxonmobil_all <- CAR_exxonmobil_all/sqrt_exxonmobil_all
 
-CAR_exxonmobil_t0
+test_exxonmobil_t0 <- CAR_exxonmobil_t0/sqrt_exxonmobil_t0
 
-CAR_exxonmobil_t1
+test_exxonmobil_t1 <- CAR_exxonmobil_t1/sqrt_exxonmobil_t1
 
-CAR_exxonmobil_t2
+test_exxonmobil_t2 <- CAR_exxonmobil_t2/sqrt_exxonmobil_t2
+
+#### P ----
+
+pv_exxonmobil_all <- 2*pt(q = test_exxonmobil_all, df = 212, lower.tail = FALSE)
+
+pv_exxonmobil_t0 <- 2*pt(q = test_exxonmobil_t0, df = 170, lower.tail = FALSE)
+
+pv_exxonmobil_t1 <- 2*pt(q = test_exxonmobil_t1, df = 19, lower.tail = FALSE)
+
+pv_exxonmobil_t2 <- 2*pt(q = test_exxonmobil_t2, df = 21, lower.tail = FALSE)
 
 ### Conoco ----
+#### T ----
 
-CAR_conoco_all
+test_conoco_all <- CAR_conoco_all/sqrt_conoco_all
 
-CAR_conoco_t0
+test_conoco_t0 <- CAR_conoco_t0/sqrt_conoco_t0
 
-CAR_conoco_t1
+test_conoco_t1 <- CAR_conoco_t1/sqrt_conoco_t1
 
-CAR_conoco_t2
+test_conoco_t2 <- CAR_conoco_t2/sqrt_conoco_t2
+
+#### P ----
+
+pv_conoco_all <- 2*pt(q = test_conoco_all, df = 212, lower.tail = FALSE)
+
+pv_conoco_t0 <- 2*pt(q = test_conoco_t0, df = 170, lower.tail = FALSE)
+
+pv_conoco_t1 <- 2*pt(q = test_conoco_t1, df = 19, lower.tail = FALSE)
+
+pv_conoco_t2 <- 2*pt(q = test_conoco_t2, df = 21, lower.tail = FALSE)
 
 ### Chevron ----
+#### T ----
 
-CAR_chevron_all
+test_chevron_all <- CAR_chevron_all/sqrt_chevron_all
 
-CAR_chevron_t0
+test_chevron_t0 <- CAR_chevron_t0/sqrt_chevron_t0
 
-CAR_chevron_t1
+test_chevron_t1 <- CAR_chevron_t1/sqrt_chevron_t1
 
-CAR_chevron_t2
+test_chevron_t2 <- CAR_chevron_t2/sqrt_chevron_t2
+
+#### P ----
+
+pv_chevron_all <- 2*pt(q = test_chevron_all, df = 212, lower.tail = FALSE)
+
+pv_chevron_t0 <- 2*pt(q = test_chevron_t0, df = 170, lower.tail = FALSE)
+
+pv_chevron_t1 <- 2*pt(q = test_chevron_t1, df = 19, lower.tail = FALSE)
+
+pv_chevron_t2 <- 2*pt(q = test_chevron_t2, df = 21, lower.tail = FALSE)
 
 ### Industry ----
+#### T ----
 
-CAR_industry_all
+test_industry_all <- CAR_industry_all/sqrt_industry_all
 
-CAR_industry_t0
+test_industry_t0 <- CAR_industry_t0/sqrt_industry_t0
 
-CAR_industry_t1
+test_industry_t1 <- CAR_industry_t1/sqrt_industry_t1
 
-CAR_industry_t2
+test_industry_t2 <- CAR_industry_t2/sqrt_industry_t2
+
+#### P ----
+
+pv_industry_all <- 2*pt(q = test_industry_all, df = 212, lower.tail = FALSE)
+
+pv_industry_t0 <- 2*pt(q = test_industry_t0, df = 170, lower.tail = FALSE)
+
+pv_industry_t1 <- 2*pt(q = test_industry_t1, df = 19, lower.tail = FALSE)
+
+pv_industry_t2 <- 2*pt(q = test_industry_t2, df = 21, lower.tail = FALSE)
 
 ### Market ----
+#### T ----
 
-CAR_market_all
+test_market_all <- CAR_market_all/sqrt_market_all
 
-CAR_market_t0
+test_market_t0 <- CAR_market_t0/sqrt_market_t0
 
-CAR_market_t1
+test_market_t1 <- CAR_market_t1/sqrt_market_t1
 
-CAR_market_t2
+test_market_t2 <- CAR_market_t2/sqrt_market_t2
 
+#### P ----
 
+pv_market_all <- 2*pt(q = test_market_all, df = 212, lower.tail = FALSE)
 
+pv_market_t0 <- 2*pt(q = test_market_t0, df = 170, lower.tail = FALSE)
+
+pv_market_t1 <- 2*pt(q = test_market_t1, df = 19, lower.tail = FALSE)
+
+pv_market_t2 <- 2*pt(q = test_market_t2, df = 21, lower.tail = FALSE)
 
 
